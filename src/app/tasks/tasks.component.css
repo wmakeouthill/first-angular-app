@@ -1,0 +1,111 @@
+#tasks {
+  padding: 1rem;
+  border-radius: 8px;
+  max-height: 60vh;
+  overflow: auto;
+  background-color: #3a2c54;
+}
+
+/* Estilo da barra de rolagem minimalista para #tasks */
+#tasks::-webkit-scrollbar {
+  width: 4px;
+}
+
+#tasks::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#tasks::-webkit-scrollbar-thumb {
+  background-color: rgba(153, 101, 221, 0.5);
+  border-radius: 4px;
+}
+
+#tasks::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(153, 101, 221, 0.8);
+}
+
+/* Firefox */
+#tasks {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(153, 101, 221, 0.5) transparent;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+h2 {
+  margin: 0;
+  font-size: 0.9rem;
+  width: 60%;
+  text-wrap: balance;
+}
+
+menu {
+  margin: 0;
+  padding: 0;
+}
+
+menu button {
+  font: inherit;
+  cursor: pointer;
+  background-color: #9965dd;
+  border-radius: 4px;
+  border: none;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+menu button:hover,
+menu button:active {
+  background-color: #a565dd
+}
+
+ul {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 50vh;
+  overflow: auto;
+}
+
+/* Estilo da barra de rolagem minimalista para ul */
+ul::-webkit-scrollbar {
+  width: 4px;
+}
+
+ul::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+ul::-webkit-scrollbar-thumb {
+  background-color: rgba(153, 101, 221, 0.5);
+  border-radius: 4px;
+}
+
+ul::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(153, 101, 221, 0.8);
+}
+
+/* Firefox */
+ul {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(153, 101, 221, 0.5) transparent;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  menu {
+    width: auto;
+  }
+}
