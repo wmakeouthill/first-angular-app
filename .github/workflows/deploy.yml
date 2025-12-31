@@ -44,12 +44,18 @@ jobs:
       - name: Verify build output
         id: build-output
         run: |
-          if [ -f "dist/first-angular-app/index.html" ]; then
-            echo "path=./dist/first-angular-app" >> $GITHUB_OUTPUT
-            echo "✅ Build output encontrado em dist/first-angular-app"
-          elif [ -f "dist/first-angular-app/browser/index.html" ]; then
+          echo "🔍 Procurando arquivos de build..."
+          find dist -name "index.html" -type f || echo "Nenhum index.html encontrado"
+          echo ""
+          echo "📁 Estrutura do diretório dist:"
+          find dist -type f -name "*.html" -o -name "*.js" | head -10 || true
+          echo ""
+          if [ -f "dist/first-angular-app/browser/index.html" ]; then
             echo "path=./dist/first-angular-app/browser" >> $GITHUB_OUTPUT
             echo "✅ Build output encontrado em dist/first-angular-app/browser"
+          elif [ -f "dist/first-angular-app/index.html" ]; then
+            echo "path=./dist/first-angular-app" >> $GITHUB_OUTPUT
+            echo "✅ Build output encontrado em dist/first-angular-app"
           elif [ -f "dist/browser/index.html" ]; then
             echo "path=./dist/browser" >> $GITHUB_OUTPUT
             echo "✅ Build output encontrado em dist/browser"
@@ -58,7 +64,8 @@ jobs:
             echo "✅ Build output encontrado em dist"
           else
             echo "❌ index.html não encontrado!"
-            find dist -name "index.html" || true
+            echo "📂 Conteúdo completo de dist:"
+            ls -laR dist || true
             exit 1
           fi
           echo "📦 Path configurado: ${{ steps.build-output.outputs.path }}"
