@@ -44,22 +44,35 @@ jobs:
       - name: Verify build output
         id: build-output
         run: |
-          if [ -f "dist/first-angular-app/browser/index.html" ]; then
-            echo "path=./dist/first-angular-app/browser" >> $GITHUB_OUTPUT
-          elif [ -f "dist/first-angular-app/index.html" ]; then
+          if [ -f "dist/first-angular-app/index.html" ]; then
             echo "path=./dist/first-angular-app" >> $GITHUB_OUTPUT
+            echo "✅ Build output encontrado em dist/first-angular-app"
+          elif [ -f "dist/first-angular-app/browser/index.html" ]; then
+            echo "path=./dist/first-angular-app/browser" >> $GITHUB_OUTPUT
+            echo "✅ Build output encontrado em dist/first-angular-app/browser"
           elif [ -f "dist/browser/index.html" ]; then
             echo "path=./dist/browser" >> $GITHUB_OUTPUT
+            echo "✅ Build output encontrado em dist/browser"
           elif [ -f "dist/index.html" ]; then
             echo "path=./dist" >> $GITHUB_OUTPUT
+            echo "✅ Build output encontrado em dist"
           else
             echo "❌ index.html não encontrado!"
             find dist -name "index.html" || true
             exit 1
           fi
+          echo "📦 Path configurado: ${{ steps.build-output.outputs.path }}"
 
       - name: Create 404.html for SPA routing
         run: cp "${{ steps.build-output.outputs.path }}/index.html" "${{ steps.build-output.outputs.path }}/404.html"
+
+      - name: List build output
+        run: |
+          echo "📁 Conteúdo do build:"
+          ls -la "${{ steps.build-output.outputs.path }}" || true
+          echo ""
+          echo "📄 Verificando index.html:"
+          head -5 "${{ steps.build-output.outputs.path }}/index.html" || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
